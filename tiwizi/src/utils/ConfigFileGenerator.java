@@ -1,4 +1,4 @@
-package GrimmUtils;
+package utils;
 
 import java.io.BufferedWriter;
 import java.io.File;

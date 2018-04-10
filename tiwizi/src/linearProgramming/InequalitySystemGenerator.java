@@ -1,4 +1,4 @@
-package LinearProgramming;
+package linearProgramming;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 
-import GrimmUtils.ConfigFileReader;
-import GrimmUtils.ModelReader;
+import utils.ConfigFileReader;
+import utils.ModelReader;
 
 public class InequalitySystemGenerator {
 
@@ -58,12 +58,5 @@ public class InequalitySystemGenerator {
 			res=res+"\n"+s;
 		}
 		return res;
-	}
-	
-	
-	
-	
-	
-
-	
+	}	
 }
