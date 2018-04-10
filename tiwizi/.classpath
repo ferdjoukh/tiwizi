@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="plugins4grimm/jdom-2.0.6.jar"/>
+	<classpathentry kind="lib" path="plugins4grimm/lpg.runtime.java_2.0.17.v201004271640.jar"/>
+	<classpathentry kind="lib" path="plugins4grimm/org.eclipse.emf.common_2.12.0.v20160420-0247.jar"/>
+	<classpathentry kind="lib" path="plugins4grimm/org.eclipse.emf.ecore_2.12.0.v20160420-0247.jar"/>
+	<classpathentry kind="lib" path="plugins4grimm/org.eclipse.emf.ecore.xmi_2.12.0.v20160420-0247.jar"/>
+	<classpathentry kind="lib" path="plugins4grimm/org.eclipse.ocl_3.6.100.v20160613-1351.jar"/>
+	<classpathentry kind="lib" path="plugins4grimm/org.eclipse.ocl.common_1.4.100.v20160613-1351.jar"/>
+	<classpathentry kind="lib" path="plugins4grimm/org.eclipse.ocl.ecore_3.6.100.v20160613-1351.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

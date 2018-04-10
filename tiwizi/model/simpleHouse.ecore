@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="House" nsURI="House" nsPrefix="House">
+  <eClassifiers xsi:type="ecore:EClass" name="House">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="room" upperBound="-1" eType="#//Room"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wall" lowerBound="4" upperBound="-1"
+        eType="#//Wall" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Room">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wallinRoom" lowerBound="2"
+        upperBound="4" eType="#//Wall" eOpposite="#//Wall/roomofWall"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomofWall" lowerBound="1"
+        upperBound="5" eType="#//Room" eOpposite="#//Room/wallinRoom"/>
+  </eClassifiers>
+</ecore:EPackage>
