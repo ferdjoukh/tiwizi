@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 
-import Exceptions.fileDoesNotExist;
 import GrimmUtils.ConfigFileReader;
 import GrimmUtils.ModelReader;
 
