@@ -60,7 +60,11 @@ public class Inequality {
 	public String getOperand() {
 		return operand;
 	}
-	
+			
+	public int getPosition() {
+		return position;
+	}
+
 	/**
 	 * It prints an equation using the classical shape: a*x +b*y -c*z <= 0
 	 */
