@@ -62,7 +62,7 @@ public class Inequality {
 	}
 	
 	/**
-	 * It prints an equation unsing the classical shape: a*x +b*y -c*z <= 0
+	 * It prints an equation using the classical shape: a*x +b*y -c*z <= 0
 	 */
 	public String toString(){
 		
