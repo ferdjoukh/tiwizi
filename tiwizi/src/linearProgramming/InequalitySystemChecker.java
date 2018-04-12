@@ -31,14 +31,42 @@ public class InequalitySystemChecker {
 		
 	}
 	
-	public static boolean isInequalityConsistant(Inequality inequality, 
-			ArrayList<Integer> candidateValues){
+	/**
+	 * 
+	 * Given an inequality and the candidates values, it says if the inequality is consistent
+	 * 
+	 * eg: 2*x -4*y <= 0 values=[1,2]
+	 *    result: 2 - 8 <= 0 ? true
+	 * 
+	 * eg: 2*x -4*y <= 0 values=[3,1]
+	 *     result: 6 - 4 <=0 ? false
+	 * 
+	 * @param inequality
+	 * @param candidateValues
+	 * @return
+	 * @throws UnknownOperandForInequality 
+	 */
+	public static boolean isInequalityConsistent(Inequality inequality, 
+			ArrayList<Integer> candidateValues) throws UnknownOperandForInequality{
 		
-		boolean result= false;
+		boolean result = false;
 		
+		int valueOfLeftSide = solveInequality(inequality, candidateValues);
 		
+		switch (inequality.getOperand()){
+			case "<=": if(valueOfLeftSide<=0) return true; else return false;
 		
-		return result;
+			case ">=": if(valueOfLeftSide>=0) return true; else return false;
+				
+			case "<":  if(valueOfLeftSide<0) return true; else return false;
+				
+			case ">":  if(valueOfLeftSide>0) return true; else return false;
+				
+			case "=":  if(valueOfLeftSide==0) return true; else return false;
+				
+			default: throw new UnknownOperandForInequality(inequality.getOperand()); 			
+		}	
 	}
+	
 
 }
