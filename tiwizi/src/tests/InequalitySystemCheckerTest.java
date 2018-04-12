@@ -109,4 +109,34 @@ public class InequalitySystemCheckerTest {
 		assertEquals(false, res);
 	}
 	
+	@Test
+	public void greaterOrEqualTrue() throws UnknownOperandForInequality{
+		
+		Inequality equation = new Inequality(">=");
+		equation.addVariable("x", 2);
+		equation.addVariable("y", -4);
+		
+		ArrayList<Integer> candidate= new ArrayList<Integer>();
+		candidate.add(2);
+		candidate.add(1);
+		
+		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
+		assertEquals(true, res);
+	}
+	
+	@Test
+	public void greaterOrEqualFalse() throws UnknownOperandForInequality{
+		
+		Inequality equation = new Inequality(">=");
+		equation.addVariable("x", 2);
+		equation.addVariable("y", -4);
+		
+		ArrayList<Integer> candidate= new ArrayList<Integer>();
+		candidate.add(2);
+		candidate.add(2);
+		
+		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
+		assertEquals(false, res);
+	}
+	
 }
