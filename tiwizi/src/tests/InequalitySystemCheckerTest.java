@@ -106,6 +106,9 @@ public class InequalitySystemCheckerTest {
 		candidate.add(1);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
+		
+		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
+		
 		assertEquals(false, res);
 	}
 	
@@ -121,6 +124,9 @@ public class InequalitySystemCheckerTest {
 		candidate.add(1);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
+		
+		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
+				
 		assertEquals(true, res);
 	}
 	
@@ -136,6 +142,9 @@ public class InequalitySystemCheckerTest {
 		candidate.add(2);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
+		
+		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
+				
 		assertEquals(false, res);
 	}
 	
@@ -151,6 +160,9 @@ public class InequalitySystemCheckerTest {
 		candidate.add(1);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
+		
+		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
+				
 		assertEquals(true, res);
 	}
 	
@@ -165,7 +177,12 @@ public class InequalitySystemCheckerTest {
 		candidate.add(2);
 		candidate.add(2);
 		
+		
+		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
+		
+		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
+		
 		assertEquals(false, res);
 	}
 	

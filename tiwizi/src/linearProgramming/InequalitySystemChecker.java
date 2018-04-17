@@ -68,5 +68,9 @@ public class InequalitySystemChecker {
 		}	
 	}
 	
+	public static void checkAllSystem(ArrayList<Inequality> inequalities){
+		
+	}
+	
 
 }
