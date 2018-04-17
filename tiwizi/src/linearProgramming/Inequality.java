@@ -82,8 +82,8 @@ public class Inequality {
 					result= result+ " +"+ coefficients[i]+"*"+unknowns[i];
 			}
 		}
-		
-		result= result +" "+ operand+ " 0";
+		String opFormat= String.format("%2s", operand);
+		result= result +" "+ opFormat + " 0";
 		
 		return result;
 	}
