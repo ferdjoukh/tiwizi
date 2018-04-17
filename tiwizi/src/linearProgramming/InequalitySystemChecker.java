@@ -79,24 +79,23 @@ public class InequalitySystemChecker {
 	 * @return
 	 * @throws UnknownOperandForInequality
 	 */
-	public static ArrayList<MetProblem> checkAllSystem(ArrayList<Inequality> inequalities, ArrayList<ArrayList<Integer>> candidates) throws UnknownOperandForInequality{
+	public static ArrayList<MetProblem> checkAllSystem(InequalitySystem system) throws UnknownOperandForInequality{
 		
-		assert inequalities.size()==candidates.size(): 
-			" not enough candidate values: "+ inequalities.size() + " != "+candidates.size();
+		assert system.getInequalities().size()==system.getCandidates().size(): 
+			" not enough candidate values: "+ system.getInequalities().size() 
+			+ " != "+system.getCandidates().size();
 		
 		ArrayList<MetProblem> problems= new ArrayList<MetProblem>();
 		
-		for(int i=0; i<inequalities.size();i++){
-			boolean res=isInequalityConsistent(inequalities.get(i), candidates.get(i));
+		for(int i=0; i<system.getInequalities().size();i++){
+			boolean res=isInequalityConsistent(system.getInequalities().get(i), system.getCandidates().get(i));
 			
 			if(!res){
-				MetProblem problem= new MetProblem(inequalities.get(i), candidates.get(i));
+				MetProblem problem= new MetProblem(system.getInequalities().get(i), system.getCandidates().get(i));
 				problems.add(problem);
 			}
 		}
 		
 		return problems;
-	}
-	
-
+	}	
 }

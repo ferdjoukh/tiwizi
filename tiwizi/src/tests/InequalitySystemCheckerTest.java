@@ -10,6 +10,7 @@ import linearProgramming.Inequality;
 import linearProgramming.InequalitySystem;
 import linearProgramming.InequalitySystemChecker;
 import linearProgramming.UnknownOperandForInequality;
+import utils.MetProblem;
 
 public class InequalitySystemCheckerTest {
 	
@@ -20,8 +21,6 @@ public class InequalitySystemCheckerTest {
 		Inequality equation = new Inequality("<=");
 		equation.addVariable("Wall", 4);
 		equation.addVariable("Room", -1);
-		InequalitySystem ineqSystem= new InequalitySystem();
-		ineqSystem.addInequality(equation);
 		
 		ArrayList<Integer> candidate= new ArrayList<Integer>();
 		candidate.add(1);
@@ -36,8 +35,6 @@ public class InequalitySystemCheckerTest {
 		Inequality equation = new Inequality("<=");
 		equation.addVariable("H", 0);
 		equation.addVariable("R", -1);
-		InequalitySystem ineqSystem= new InequalitySystem();
-		ineqSystem.addInequality(equation);
 		
 		ArrayList<Integer> candidate= new ArrayList<Integer>();
 		candidate.add(1);
@@ -52,8 +49,6 @@ public class InequalitySystemCheckerTest {
 		Inequality equation = new Inequality("<=");
 		equation.addVariable("R", 1);
 		equation.addVariable("H", -4);
-		InequalitySystem ineqSystem= new InequalitySystem();
-		ineqSystem.addInequality(equation);
 		
 		ArrayList<Integer> candidate= new ArrayList<Integer>();
 		candidate.add(1);
@@ -107,7 +102,6 @@ public class InequalitySystemCheckerTest {
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		
-		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
 		
 		assertEquals(false, res);
 	}
@@ -125,7 +119,6 @@ public class InequalitySystemCheckerTest {
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		
-		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
 				
 		assertEquals(true, res);
 	}
@@ -143,7 +136,6 @@ public class InequalitySystemCheckerTest {
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		
-		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
 				
 		assertEquals(false, res);
 	}
@@ -161,7 +153,7 @@ public class InequalitySystemCheckerTest {
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		
-		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
+		//System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
 				
 		assertEquals(true, res);
 	}
@@ -177,19 +169,49 @@ public class InequalitySystemCheckerTest {
 		candidate.add(2);
 		candidate.add(2);
 		
-		
-		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
-		
-		System.out.println(equation.toString()+" "+ candidate.toString() +" >> "+ res);
-		
+				
 		assertEquals(false, res);
 	}
 	
 	@Test 
-	public void checkWholeSystem(){
+	public void checkWholeSystem() throws UnknownOperandForInequality{
+		Inequality equation = new Inequality("<=");
+		equation.addVariable("Wall", 1);
+		equation.addVariable("Room", -4);
 		
+		ArrayList<Integer> candidate= new ArrayList<Integer>();
+		candidate.add(5);
+		candidate.add(1);
 		
+		Inequality equation2 = new Inequality("<=");
+		equation2.addVariable("Room", 1);
+		equation2.addVariable("House", -4);
+		
+		ArrayList<Integer> candidate2= new ArrayList<Integer>();
+		candidate2.add(5);
+		candidate2.add(1);
+		
+		Inequality equation3 = new Inequality("<=");
+		equation3.addVariable("House", 4);
+		equation3.addVariable("Wall", -1);
+				
+		ArrayList<Integer> candidate3= new ArrayList<Integer>();
+		candidate3.add(2);
+		candidate3.add(8);
+		
+		InequalitySystem system= new InequalitySystem();
+		system.addInequalityCandidate(equation, candidate);
+		system.addInequalityCandidate(equation2, candidate2);
+		system.addInequalityCandidate(equation3, candidate3);
+		
+		ArrayList<MetProblem> problems=InequalitySystemChecker.checkAllSystem(system);
+		
+		for(MetProblem problem: problems){
+			System.out.println(problem.toString());
+		}
+		
+		assertEquals(2, problems.size());
 		
 	}
 	
