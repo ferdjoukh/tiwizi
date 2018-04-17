@@ -2,6 +2,8 @@ package linearProgramming;
 
 import java.util.ArrayList;
 
+import utils.MetProblem;
+
 public class InequalitySystemChecker {
 	
 	/**
@@ -68,8 +70,32 @@ public class InequalitySystemChecker {
 		}	
 	}
 	
-	public static void checkAllSystem(ArrayList<Inequality> inequalities){
+	/**
+	 * It browses the ArrayList of inequalities and solve them according to corresponding candidate values.
+	 * If an inconsistent inequality is met, it is added to ArrayList of problems
+	 * 
+	 * @param inequalities
+	 * @param candidates
+	 * @return
+	 * @throws UnknownOperandForInequality
+	 */
+	public static ArrayList<MetProblem> checkAllSystem(ArrayList<Inequality> inequalities, ArrayList<ArrayList<Integer>> candidates) throws UnknownOperandForInequality{
 		
+		assert inequalities.size()==candidates.size(): 
+			" not enough candidate values: "+ inequalities.size() + " != "+candidates.size();
+		
+		ArrayList<MetProblem> problems= new ArrayList<MetProblem>();
+		
+		for(int i=0; i<inequalities.size();i++){
+			boolean res=isInequalityConsistent(inequalities.get(i), candidates.get(i));
+			
+			if(!res){
+				MetProblem problem= new MetProblem(inequalities.get(i), candidates.get(i));
+				problems.add(problem);
+			}
+		}
+		
+		return problems;
 	}
 	
 

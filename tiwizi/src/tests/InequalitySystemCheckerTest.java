@@ -186,4 +186,11 @@ public class InequalitySystemCheckerTest {
 		assertEquals(false, res);
 	}
 	
+	@Test 
+	public void checkWholeSystem(){
+		
+		
+		
+	}
+	
 }
