@@ -31,7 +31,32 @@ public class MetProblem {
 	 */
 	public void setMessage(){
 		
+		
+		
 		this.message="";
 	}
+	
+	public MetProblem(){
+		
+	}
+			
+	public Inequality getInequality() {
+		return inequality;
+	}
 
+	public void setInequality(Inequality inequality) {
+		this.inequality = inequality;
+	}
+
+	public ArrayList<Integer> getCandidates() {
+		return candidates;
+	}
+
+	public void setCandidates(ArrayList<Integer> candidates) {
+		this.candidates = candidates;
+	}
+
+	public String getMessage() {
+		return message;
+	}
 }
