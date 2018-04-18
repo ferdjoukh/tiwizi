@@ -70,12 +70,13 @@ public class InequalitySystemChecker {
 	}
 	
 	/**
-	 * It browses the ArrayList of inequalities and solve them according to corresponding candidate values.
-	 * If an inconsistent inequality is met, it is added to ArrayList of problems
-	 * 
-	 * @param inequalities
-	 * @param candidates
-	 * @return
+	 * It browses the system.ArrayList<Inequality> and 
+	 * solves them according to corresponding system.Candidates values.
+	 * If an inconsistent inequality is met, it is added to ArrayList<MetProblem>.
+	 * The latter is returned
+	 *  
+	 * @param system
+	 * @return ArrayList<MetProblem> It contains all inconsistent inequalities with a help message
 	 * @throws UnknownOperandForInequality
 	 */
 	public static ArrayList<MetProblem> checkAllSystem(InequalitySystem system) throws UnknownOperandForInequality{
