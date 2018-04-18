@@ -24,6 +24,18 @@ public class InequalitySystemGenerator {
 	
 	private ArrayList<String> inequalities= new ArrayList<String>();
 	
+	/**
+	 * It creates an object of type InequalitySystemGenerator.
+	 * This requires an existing metamodel file, a valid root class and an existing config file 
+	 *
+	 * 
+	 * @param metamodel file path for an Ecore Metamodel
+	 * @param rootClass the root class of previous metamodel
+	 * @param configFile a .grimm configuration file
+	 * @throws UnknownMetamodel
+	 * @throws UnknownConfigFile
+	 * @throws UnknownClassName
+	 */
 	public InequalitySystemGenerator(String metamodel, String rootClass, String configFile) throws UnknownMetamodel, UnknownConfigFile, UnknownClassName {
 		
 		this.configFile = configFile;
@@ -36,11 +48,14 @@ public class InequalitySystemGenerator {
 		
 		system=new InequalitySystem();
 		classSizes= modelreader.getClassSize();
-		
-		System.out.println(classSizes.toString());
 	}
 		
-	public void fillinequalities(){
+	/**
+	 * The main method of this class. It creates the inequality system
+	 * and the candidate values for each inequality
+	 * 
+	 */
+	public void createInequalitySystem(){
 		
 		for(EClass c: modelreader.getClasses()){
 			
@@ -57,6 +72,35 @@ public class InequalitySystemGenerator {
 				String inUpper= r.getEType().getName() + " <= "+ ub+"*"+c.getName();
 				inequalities.add(inlower);
 				inequalities.add(inUpper);
+				
+				Inequality inequality= new Inequality("<=");
+				inequality.addVariable(c.getName(), r.getLowerBound());
+				inequality.addVariable(r.getEType().getName(), -1);
+				
+				ArrayList<Integer> candidates= new ArrayList<Integer>();
+				int candidateValue= classSizes.get(modelreader.getClassIndex(c.getName())-1);
+				candidates.add(candidateValue);
+				
+				candidateValue= classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1);
+				candidates.add(candidateValue);
+				
+				Inequality inequality1= new Inequality("<=");
+				inequality1.addVariable(r.getEType().getName(), 1);
+				inequality1.addVariable(c.getName(), -ub);
+				
+				ArrayList<Integer> candidates1= new ArrayList<Integer>();
+				candidateValue= classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1);
+				candidates1.add(candidateValue);
+	
+				candidateValue= classSizes.get(modelreader.getClassIndex(c.getName())-1);		
+				candidates1.add(candidateValue);
+				
+				system.addInequalityCandidate(inequality, candidates);
+				system.addInequalityCandidate(inequality1, candidates1);
+				
+				System.out.println("          "+inequality.toString());
+				System.out.println("          "+inequality1.toString());
+				
 			}
 		}
 		
@@ -69,5 +113,33 @@ public class InequalitySystemGenerator {
 			res=res+"\n"+s;
 		}
 		return res;
+	}
+
+	public String getMetamodel() {
+		return metamodel;
+	}
+
+	public String getRootClass() {
+		return rootClass;
+	}
+
+	public String getConfigFile() {
+		return configFile;
+	}
+
+	public ConfigFileReader getConfigreader() {
+		return configreader;
+	}
+
+	public ModelReader getModelreader() {
+		return modelreader;
+	}
+
+	public ArrayList<Integer> getClassSizes() {
+		return classSizes;
+	}
+
+	public InequalitySystem getSystem() {
+		return system;
 	}	
 }

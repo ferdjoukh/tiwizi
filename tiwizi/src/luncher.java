@@ -45,7 +45,7 @@ public class luncher {
 		}else{
 					
 			InequalitySystemGenerator generator= new InequalitySystemGenerator(metamodel, rootClass, configFile);
-			generator.fillinequalities();
+			generator.createInequalitySystem();
 			System.out.println(generator);
 		}
 		

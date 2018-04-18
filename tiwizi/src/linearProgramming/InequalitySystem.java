@@ -30,4 +30,28 @@ public class InequalitySystem {
 	public ArrayList<ArrayList<Integer>> getCandidates() {
 		return candidates;
 	}
+	
+	/**
+	 * It prints the InequlaitySystem
+	 * 
+	 * @param mode: 0: only inequalities
+	 * 				1  inequalities + candidates
+	 * @return printed version of InequalitySystem
+	 */
+	public String printInequalitySystem(Integer mode){
+		
+		String res="";
+		for(int i=0;i<inequalities.size();i++){
+				
+				if(mode == 0){
+					res= res+ inequalities.get(i).toString() + "\n";
+				}
+				
+				if(mode==1){
+					res= res+ inequalities.get(i).toString() + "  " + candidates.get(i).toString() +"\n";
+				}
+		}
+		
+		return res;
+	}
 }
