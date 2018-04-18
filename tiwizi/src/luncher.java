@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import Exceptions.UnknownClassName;
 import Exceptions.UnknownConfigFile;
 import Exceptions.UnknownMetamodel;
 import linearProgramming.InequalitySystemGenerator;
@@ -9,7 +10,7 @@ import utils.*;
 
 public class luncher {
 
-	public static void main(String[] args) throws UnknownConfigFile, UnknownMetamodel {
+	public static void main(String[] args) throws UnknownConfigFile, UnknownMetamodel, UnknownClassName {
 		// TODO Auto-generated method stub
 		
 		//Give meta-model file path
@@ -19,7 +20,7 @@ public class luncher {
 		
 		//if args are given use them, otherwise use default ones
 		if(args.length==0){
-			metamodel = "model/simpleHouse1.ecore";
+			metamodel = "model/simpleHouse.ecore";
 			rootClass = "House";
 			configFile = "confFiles/House1.grimm";
 		}else if(args.length==3){

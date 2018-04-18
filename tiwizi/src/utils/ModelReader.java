@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.File;
 import java.util.*;
 
 import org.eclipse.emf.common.util.EList;
@@ -11,6 +12,7 @@ import org.eclipse.emf.ecore.resource.impl.*;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 
+import Exceptions.UnknownClassName;
 import Exceptions.UnknownMetamodel;
 
 public class ModelReader {
@@ -20,13 +22,13 @@ public class ModelReader {
 	 */
 	Resource resource;
 	EPackage BasePackage;
-	String racine;
+	String rootClass;
 	ArrayList<Integer> sizesMin;
 	ArrayList<Integer> sizes;
 	ConfigFileReader cfr;
 	
 	
-	public ModelReader(String str,String racine,int lb,int ub){
+	public ModelReader(String str,String rootClass,int lb,int ub){
 		
 		 Resource.Factory.Registry reg=Resource.Factory.Registry.INSTANCE;
 		 Map<String,Object> m = reg.getExtensionToFactoryMap();
@@ -40,16 +42,18 @@ public class ModelReader {
 		EPackage c= (EPackage)  resource.getContents().get(0);
 		
 		this.BasePackage= c;
-		this.racine=racine;
+		this.rootClass=rootClass;
 		
 		sizeClassInit(lb,ub);
 		sizeClassMinInit(1,lb);
 	}
 	
-	public ModelReader(String metamodelFilePath,String racine, ConfigFileReader cfr) throws UnknownMetamodel{
+	public ModelReader(String metamodelFilePath,String rootClass, ConfigFileReader cfr) throws UnknownMetamodel, UnknownClassName{
 	
-		try{
-			
+		Boolean metamodelExists= new File(metamodelFilePath).isFile();
+		
+		if(metamodelExists){
+		
 			this.cfr=cfr;
 			
 			Resource.Factory.Registry reg=Resource.Factory.Registry.INSTANCE;
@@ -62,15 +66,19 @@ public class ModelReader {
 			
 			this.resource=resource;
 			
-			EPackage c= (EPackage) resource.getContents().get(0);
+			EPackage epackage= (EPackage) resource.getContents().get(0);
 			
-			this.BasePackage= c;
-			this.racine=racine;
+			this.BasePackage= epackage;
 			
-			sizeClassRead();
-			sizeClassMinRead();
+			if(getClassByName(rootClass)!=null){
+				this.rootClass=rootClass;
+				sizeClassRead();
+				sizeClassMinRead();
+			}else{
+				throw new UnknownClassName(rootClass, metamodelFilePath);
+			}
 		}
-		catch(Exception e){
+		else{
 			throw new UnknownMetamodel(metamodelFilePath);
 		}
 	}
@@ -81,7 +89,7 @@ public class ModelReader {
 		ArrayList<EClass> cls= (ArrayList<EClass>) getClasses();
 		ArrayList<Integer> sizes= new ArrayList<Integer>(cls.size());
 		
-		sizes.add(getClassIndex(racine)-1,1);
+		sizes.add(getClassIndex(rootClass)-1,1);
 	    
 		int i=1;
 		
@@ -99,7 +107,7 @@ public class ModelReader {
 		ArrayList<Integer> sizes= new ArrayList<Integer>(cls.size());
 		ArrayList<String> content = cfr.getContent();
 		
-		sizes.add(getClassIndex(racine)-1,1);
+		sizes.add(getClassIndex(rootClass)-1,1);
 	    
 		int i=0;
 		String str;
@@ -141,12 +149,27 @@ public class ModelReader {
 			}
 		}
 		
-		
 		return cls;
 	}
 	
-	public List<EClass> getAbtractClasses()
-	{
+	public EClass getClassByName(String className){
+		
+		EClass eclass=null;
+		for( EClassifier cf :BasePackage.getEClassifiers()){
+			
+			if (cf instanceof EClass){
+				
+				EClass cl= (EClass) cf;
+				if (cl.getName().equals(className))
+						eclass= cl;	
+			}
+		}
+		return eclass;
+	}
+	
+	
+	public List<EClass> getAbtractClasses(){
+		
 		ArrayList<EClass> cls= new ArrayList<EClass>();
 		for( EClassifier cf :BasePackage.getEClassifiers())
 		{
@@ -204,7 +227,7 @@ public class ModelReader {
 			int random = (int)(Math.random() * (upperb-moy)) + moy;
 			sizes.add(i, random);
 		}
-		sizes.add(getClassIndex(racine)-1,1);
+		sizes.add(getClassIndex(rootClass)-1,1);
 	    this.sizes=sizes;
 	}
 	
@@ -221,7 +244,7 @@ public class ModelReader {
 			int random = (int)(Math.random() * (moy-lowerb)) + lowerb;
 			sizes.add(i, random);
 		}
-		sizes.add(getClassIndex(racine)-1,1);
+		sizes.add(getClassIndex(rootClass)-1,1);
 		this.sizesMin=sizes;
 	}
 	

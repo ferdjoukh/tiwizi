@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 
+import Exceptions.UnknownClassName;
 import Exceptions.UnknownConfigFile;
 import Exceptions.UnknownMetamodel;
 import utils.ConfigFileReader;
@@ -20,17 +21,19 @@ public class InequalitySystemGenerator {
 	private ModelReader modelreader;
 	ArrayList<String> inequalities= new ArrayList<String>();
 	
-	public InequalitySystemGenerator(String metamodel, String rootClass, String configFile) throws UnknownMetamodel, UnknownConfigFile {
+	public InequalitySystemGenerator(String metamodel, String rootClass, String configFile) throws UnknownMetamodel, UnknownConfigFile, UnknownClassName {
 		super();
-		this.metamodel = metamodel;
-		this.rootClass = rootClass;
-		this.configFile = configFile;
 		
+		this.configFile = configFile;
 		configreader= new ConfigFileReader(configFile);
 		configreader.read();
+				
+		this.metamodel = metamodel;
+		this.rootClass = rootClass;
 		modelreader = new ModelReader(metamodel, rootClass, configreader);
+		
 	}
-	
+		
 	public void fillinequalities(){
 		
 		for(EClass c: modelreader.getClasses()){
