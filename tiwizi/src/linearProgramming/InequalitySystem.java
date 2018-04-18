@@ -17,7 +17,7 @@ public class InequalitySystem {
 		inequalities= new ArrayList<Inequality>();
 		candidates= new ArrayList<ArrayList<Integer>>();
 	}
-	
+		
 	public void addInequalityCandidate(Inequality i, ArrayList<Integer> c){
 		inequalities.add(i);
 		candidates.add(c);

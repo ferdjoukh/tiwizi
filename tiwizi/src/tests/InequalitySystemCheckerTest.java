@@ -178,11 +178,13 @@ public class InequalitySystemCheckerTest {
 	public void checkWholeSystem() throws UnknownOperandForInequality{
 		Inequality equation = new Inequality("<=");
 		equation.addVariable("Wall", 1);
+		equation.addVariable("Door", 2);
 		equation.addVariable("Room", -4);
 		
 		ArrayList<Integer> candidate= new ArrayList<Integer>();
 		candidate.add(5);
-		candidate.add(1);
+		candidate.add(2);
+		candidate.add(3);
 		
 		Inequality equation2 = new Inequality("<=");
 		equation2.addVariable("Room", 1);
@@ -210,9 +212,8 @@ public class InequalitySystemCheckerTest {
 		for(MetProblem problem: problems){
 			System.out.println(problem.toString());
 		}
-		
-		assertEquals(2, problems.size());
-		
+				
+		assertEquals(1, problems.size());	
 	}
 	
 }
