@@ -19,10 +19,12 @@ public class InequalitySystemGenerator {
 	private String configFile;
 	private ConfigFileReader configreader;
 	private ModelReader modelreader;
-	ArrayList<String> inequalities= new ArrayList<String>();
+	private ArrayList<Integer> classSizes;
+	private InequalitySystem system;
+	
+	private ArrayList<String> inequalities= new ArrayList<String>();
 	
 	public InequalitySystemGenerator(String metamodel, String rootClass, String configFile) throws UnknownMetamodel, UnknownConfigFile, UnknownClassName {
-		super();
 		
 		this.configFile = configFile;
 		configreader= new ConfigFileReader(configFile);
@@ -32,6 +34,10 @@ public class InequalitySystemGenerator {
 		this.rootClass = rootClass;
 		modelreader = new ModelReader(metamodel, rootClass, configreader);
 		
+		system=new InequalitySystem();
+		classSizes= modelreader.getClassSize();
+		
+		System.out.println(classSizes.toString());
 	}
 		
 	public void fillinequalities(){
