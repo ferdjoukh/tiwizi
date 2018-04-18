@@ -1,4 +1,4 @@
-package linearProgramming;
+package Exceptions;
 
 public class UnknownOperandForInequality extends Exception {
 	

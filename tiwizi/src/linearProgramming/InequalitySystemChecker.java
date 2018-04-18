@@ -2,6 +2,7 @@ package linearProgramming;
 
 import java.util.ArrayList;
 
+import Exceptions.UnknownOperandForInequality;
 import utils.MetProblem;
 
 public class InequalitySystemChecker {

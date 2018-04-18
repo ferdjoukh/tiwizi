@@ -12,6 +12,8 @@ import java.util.Hashtable;
 
 import org.omg.CORBA.portable.InputStream;
 
+import Exceptions.UnknownConfigFile;
+
 public class ConfigFileReader {
 
 	
@@ -22,47 +24,60 @@ public class ConfigFileReader {
 	private Hashtable<String,String> featuresDomaines; 
 	
 	
-	public ConfigFileReader(String configFilePath) {
-		// TODO Auto-generated constructor stub
-		this.configFilePath = configFilePath;
+	public ConfigFileReader(String configFilePath) throws UnknownConfigFile {
+		
+		File f = new File(configFilePath);
+		if(f.exists() && !f.isDirectory()) { 
+			this.configFilePath = configFilePath;
+		}else{
+			throw new UnknownConfigFile(configFilePath);
+		}
+		
+		
+		
 	}
 
 	@SuppressWarnings("deprecation")
-	public void read() throws IOException {
+	public void read() throws UnknownConfigFile {
 		
 		ArrayList<String> content= new ArrayList<String>();
 		
-		File z= new File(configFilePath);
-		FileInputStream zz= new FileInputStream(z);
-		BufferedInputStream zzz= new BufferedInputStream(zz);
-		
-		DataInputStream reader = new DataInputStream(zzz);
-		
-		String line="";
-		
-		while(reader.available()!=0)
-		{
-			line= reader.readLine();
-			if (line.startsWith("RefsBound="))
+		File configurationFile= new File(configFilePath);
+		try{
+			FileInputStream fileInputStream= new FileInputStream(configurationFile);
+			BufferedInputStream bufferedInputStream= new BufferedInputStream(fileInputStream);
+			
+			DataInputStream dataInputReader = new DataInputStream(bufferedInputStream);
+			
+			String line="";
+			
+			while(dataInputReader.available()!=0)
 			{
-				this.RefBound= Integer.parseInt(line.substring(line.lastIndexOf("=")+1));
+				line= dataInputReader.readLine();
+				if (line.startsWith("RefsBound="))
+				{
+					this.RefBound= Integer.parseInt(line.substring(line.lastIndexOf("=")+1));
+				}
+				else if (line.startsWith("FeaturesBound="))
+				{
+					this.FeatureBound= Integer.parseInt(line.substring(line.lastIndexOf("=")+1));
+				}
+				else if(!line.startsWith("%"))
+				{
+					content.add(line);
+					//System.out.println(line);
+				}
 			}
-			else if (line.startsWith("FeaturesBound="))
-			{
-				this.FeatureBound= Integer.parseInt(line.substring(line.lastIndexOf("=")+1));
-			}
-			else if(!line.startsWith("%"))
-			{
-				content.add(line);
-				//System.out.println(line);
-			}
+			
+			this.content = content;
+			
+			dataInputReader.close();
+			bufferedInputStream.close();
+			fileInputStream.close();
 		}
-		
-		this.content = content;
-		
-		reader.close();
-		zzz.close();
-		zz.close();
+		catch(IOException e){
+			throw new UnknownConfigFile(configFilePath);
+		}
 		
 	}
 

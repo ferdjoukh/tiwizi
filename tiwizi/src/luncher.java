@@ -2,12 +2,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import Exceptions.UnknownConfigFile;
+import Exceptions.UnknownMetamodel;
 import linearProgramming.InequalitySystemGenerator;
 import utils.*;
 
 public class luncher {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws UnknownConfigFile, UnknownMetamodel {
 		// TODO Auto-generated method stub
 		
 		//Give meta-model file path
@@ -17,7 +19,7 @@ public class luncher {
 		
 		//if args are given use them, otherwise use default ones
 		if(args.length==0){
-			metamodel = "model/simpleHouse.ecore";
+			metamodel = "model/simpleHouse1.ecore";
 			rootClass = "House";
 			configFile = "confFiles/House1.grimm";
 		}else if(args.length==3){
@@ -35,10 +37,10 @@ public class luncher {
 		
 		if(!metamodelExists || !configFileExists){
 			if(!metamodelExists)
-				throw new FileNotFoundException(metamodel);
+				throw new UnknownMetamodel(metamodel);
 			
 			if(!configFileExists)
-				throw new FileNotFoundException(configFile);
+				throw new UnknownConfigFile(configFile);
 		}else{
 					
 			InequalitySystemGenerator generator= new InequalitySystemGenerator(metamodel, rootClass, configFile);

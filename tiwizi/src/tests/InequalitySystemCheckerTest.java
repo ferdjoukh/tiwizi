@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import Exceptions.UnknownOperandForInequality;
 import linearProgramming.Inequality;
 import linearProgramming.InequalitySystem;
 import linearProgramming.InequalitySystemChecker;
-import linearProgramming.UnknownOperandForInequality;
 import utils.MetProblem;
 
 public class InequalitySystemCheckerTest {
@@ -208,10 +208,11 @@ public class InequalitySystemCheckerTest {
 		system.addInequalityCandidate(equation3, candidate3);
 		
 		ArrayList<MetProblem> problems=InequalitySystemChecker.checkAllSystem(system);
-		
+		/*
 		for(MetProblem problem: problems){
 			System.out.println(problem.toString());
 		}
+		*/
 				
 		assertEquals(1, problems.size());	
 	}

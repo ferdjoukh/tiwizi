@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.resource.impl.*;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 
+import Exceptions.UnknownMetamodel;
+
 public class ModelReader {
 
 	/**
@@ -44,27 +46,35 @@ public class ModelReader {
 		sizeClassMinInit(1,lb);
 	}
 	
-	public ModelReader(String str,String racine, ConfigFileReader cfr){
-		
-		 this.cfr=cfr;
-		
-		 Resource.Factory.Registry reg=Resource.Factory.Registry.INSTANCE;
-		 Map<String,Object> m = reg.getExtensionToFactoryMap();
-		 m.put("ecore",new XMIResourceFactoryImpl());
-		 ResourceSet resourceSet=new ResourceSetImpl();
-		 URI fileURI=URI.createFileURI(str);
-		 Resource resource=resourceSet.getResource(fileURI,true);
-		
-		this.resource=resource;
-		
-		EPackage c= (EPackage) resource.getContents().get(0);
-		
-		this.BasePackage= c;
-		this.racine=racine;
-		
-		sizeClassRead();
-		sizeClassMinRead();
+	public ModelReader(String metamodelFilePath,String racine, ConfigFileReader cfr) throws UnknownMetamodel{
+	
+		try{
+			
+			this.cfr=cfr;
+			
+			Resource.Factory.Registry reg=Resource.Factory.Registry.INSTANCE;
+			Map<String,Object> m = reg.getExtensionToFactoryMap();
+			m.put("ecore",new XMIResourceFactoryImpl());
+			ResourceSet resourceSet=new ResourceSetImpl();
+			URI fileURI=URI.createFileURI(metamodelFilePath);
+			
+			Resource resource=resourceSet.getResource(fileURI,true);
+			
+			this.resource=resource;
+			
+			EPackage c= (EPackage) resource.getContents().get(0);
+			
+			this.BasePackage= c;
+			this.racine=racine;
+			
+			sizeClassRead();
+			sizeClassMinRead();
+		}
+		catch(Exception e){
+			throw new UnknownMetamodel(metamodelFilePath);
+		}
 	}
+		
 	
 	private void sizeClassMinRead() {
 		// TODO Auto-generated method stub

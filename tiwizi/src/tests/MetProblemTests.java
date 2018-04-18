@@ -23,7 +23,7 @@ public class MetProblemTests {
 		
 		MetProblem problem= new MetProblem(equation,candidate);
 		
-		System.out.println(problem.toString());
+		//System.out.println(problem.toString());
 		
 		assertEquals("More [Room] or Less [Wall]",problem.getMessage());	
 	}
@@ -41,7 +41,7 @@ public class MetProblemTests {
 		
 		MetProblem problem= new MetProblem(equation,candidate);
 		
-		System.out.println(problem.toString());
+		//System.out.println(problem.toString());
 		
 		assertEquals("More [Room] or Less [Wall]",problem.getMessage());	
 	}
@@ -59,7 +59,7 @@ public class MetProblemTests {
 		
 		MetProblem problem= new MetProblem(equation,candidate);
 		
-		System.out.println(problem.toString());
+		//System.out.println(problem.toString());
 		
 		assertEquals("More [Wall] or Less [Room]",problem.getMessage());	
 	}
@@ -77,7 +77,7 @@ public class MetProblemTests {
 		
 		MetProblem problem= new MetProblem(equation,candidate);
 		
-		System.out.println(problem.toString());
+		//System.out.println(problem.toString());
 		
 		assertEquals("More [Wall] or Less [Room]",problem.getMessage());	
 	}
