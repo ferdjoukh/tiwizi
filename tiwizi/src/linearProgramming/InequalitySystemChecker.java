@@ -29,8 +29,7 @@ public class InequalitySystemChecker {
 			result= result + candidateValues.get(i)*inequality.getCoefficients()[i];
 		}
 		
-		return result;
-		
+		return result;		
 	}
 	
 	/**
