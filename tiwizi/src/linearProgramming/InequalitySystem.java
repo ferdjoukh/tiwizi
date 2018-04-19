@@ -6,19 +6,19 @@ import java.util.ArrayList;
 public class InequalitySystem {
 	
 	private ArrayList<Inequality> inequalities;
-	private ArrayList<ArrayList<Integer>> candidates;
+	private ArrayList<ArrayList<Double>> candidates;
 	
-	public InequalitySystem(ArrayList<Inequality> inequalities, ArrayList<ArrayList<Integer>> candidates) {
+	public InequalitySystem(ArrayList<Inequality> inequalities, ArrayList<ArrayList<Double>> candidates) {
 		this.inequalities = inequalities;
 		this.candidates = candidates;
 	}
 
 	public InequalitySystem(){
 		inequalities= new ArrayList<Inequality>();
-		candidates= new ArrayList<ArrayList<Integer>>();
+		candidates= new ArrayList<ArrayList<Double>>();
 	}
 		
-	public void addInequalityCandidate(Inequality i, ArrayList<Integer> c){
+	public void addInequalityCandidate(Inequality i, ArrayList<Double> c){
 		inequalities.add(i);
 		candidates.add(c);
 	}
@@ -27,7 +27,7 @@ public class InequalitySystem {
 		return inequalities;
 	}
 
-	public ArrayList<ArrayList<Integer>> getCandidates() {
+	public ArrayList<ArrayList<Double>> getCandidates() {
 		return candidates;
 	}
 	

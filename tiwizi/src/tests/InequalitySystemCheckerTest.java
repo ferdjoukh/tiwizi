@@ -22,12 +22,12 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("Wall", 4);
 		equation.addVariable("Room", -1);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(1);
-		candidate.add(2);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)1);
+		candidate.add((double)2);
 				
-		int a=InequalitySystemChecker.solveInequality(equation,candidate);
-		assertEquals("4*1 -1*2 = 2",2,a);	
+		double a=InequalitySystemChecker.solveInequality(equation,candidate);
+		assertEquals("4*1 -1*2 = 2",2,a,0.000001);	
 	}
 	
 	@Test
@@ -36,12 +36,12 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("H", 0);
 		equation.addVariable("R", -1);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(1);
-		candidate.add(2);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)1);
+		candidate.add((double)2);
 				
-		int a=InequalitySystemChecker.solveInequality(equation,candidate);
-		assertEquals("0*H - 1*R <= 0 [1,2]",-2,a);		
+		double a=InequalitySystemChecker.solveInequality(equation,candidate);
+		assertEquals("0*H - 1*R <= 0 [1,2]",-2,a,0.00001);		
 	}
 	
 	@Test
@@ -50,12 +50,12 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("R", 1);
 		equation.addVariable("H", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(1);
-		candidate.add(2);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)1);
+		candidate.add((double)2);
 				
-		int a=InequalitySystemChecker.solveInequality(equation,candidate);
-		assertEquals("1*R - 4*H <= 0 [1,2]",-7,a);
+		double a=InequalitySystemChecker.solveInequality(equation,candidate);
+		assertEquals("1*R - 4*H <= 0 [1,2]",-7.0,a,0.00001);
 	}
 	
 	//Method: isInequalityConsistent
@@ -67,9 +67,9 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("x", 2);
 		equation.addVariable("y", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(1);
-		candidate.add(2);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)1);
+		candidate.add((double)2);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		assertEquals(true, res);
@@ -82,9 +82,9 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("x", 2);
 		equation.addVariable("y", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(1);
-		candidate.add(2);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)1);
+		candidate.add((double)2);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 	}
@@ -96,9 +96,9 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("x", 2);
 		equation.addVariable("y", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(3);
-		candidate.add(1);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)3);
+		candidate.add((double)1);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		
@@ -113,9 +113,9 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("x", 2);
 		equation.addVariable("y", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(2);
-		candidate.add(1);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)2);
+		candidate.add((double)1);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		
@@ -130,9 +130,9 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("x", 2);
 		equation.addVariable("y", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(2);
-		candidate.add(2);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)2);
+		candidate.add((double)2);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		
@@ -147,9 +147,9 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("x", 2);
 		equation.addVariable("y", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(2);
-		candidate.add(1);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)2);
+		candidate.add((double)1);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 		
@@ -165,9 +165,9 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("x", 2);
 		equation.addVariable("y", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(2);
-		candidate.add(2);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)2);
+		candidate.add((double)2);
 		
 		boolean res= InequalitySystemChecker.isInequalityConsistent(equation, candidate);
 				
@@ -181,26 +181,26 @@ public class InequalitySystemCheckerTest {
 		equation.addVariable("Door", 2);
 		equation.addVariable("Room", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(5);
-		candidate.add(2);
-		candidate.add(3);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double)5);
+		candidate.add((double)2);
+		candidate.add((double)3);
 		
 		Inequality equation2 = new Inequality("<=");
 		equation2.addVariable("Room", 1);
 		equation2.addVariable("House", -4);
 		
-		ArrayList<Integer> candidate2= new ArrayList<Integer>();
-		candidate2.add(5);
-		candidate2.add(1);
+		ArrayList<Double> candidate2= new ArrayList<Double>();
+		candidate2.add((double)5);
+		candidate2.add((double)1);
 		
 		Inequality equation3 = new Inequality("<=");
 		equation3.addVariable("House", 4);
 		equation3.addVariable("Wall", -1);
 				
-		ArrayList<Integer> candidate3= new ArrayList<Integer>();
-		candidate3.add(2);
-		candidate3.add(8);
+		ArrayList<Double> candidate3= new ArrayList<Double>();
+		candidate3.add((double)2);
+		candidate3.add((double)8);
 		
 		InequalitySystem system= new InequalitySystem();
 		system.addInequalityCandidate(equation, candidate);

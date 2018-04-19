@@ -59,6 +59,9 @@ public class InequalitySystemGenerator {
 		
 		for(EClass c: modelreader.getClasses()){
 			
+			int n= modelreader.getAllReferencesFromClasswithOpposite(c).size();
+			System.out.println(n);
+			
 			System.out.println(c.getName());
 			for (EReference r: modelreader.getAllReferencesFromClass(c)){
 				System.out.println("    "+r.getName());
@@ -77,23 +80,23 @@ public class InequalitySystemGenerator {
 				inequality.addVariable(c.getName(), r.getLowerBound());
 				inequality.addVariable(r.getEType().getName(), -1);
 				
-				ArrayList<Integer> candidates= new ArrayList<Integer>();
+				ArrayList<Double> candidates= new ArrayList<Double>();
 				int candidateValue= classSizes.get(modelreader.getClassIndex(c.getName())-1);
-				candidates.add(candidateValue);
+				candidates.add((double) candidateValue);
 				
 				candidateValue= classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1);
-				candidates.add(candidateValue);
+				candidates.add((double) candidateValue);
 				
 				Inequality inequality1= new Inequality("<=");
 				inequality1.addVariable(r.getEType().getName(), 1);
 				inequality1.addVariable(c.getName(), -ub);
 				
-				ArrayList<Integer> candidates1= new ArrayList<Integer>();
+				ArrayList<Double> candidates1= new ArrayList<Double>();
 				candidateValue= classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1);
-				candidates1.add(candidateValue);
+				candidates1.add((double) candidateValue);
 	
 				candidateValue= classSizes.get(modelreader.getClassIndex(c.getName())-1);		
-				candidates1.add(candidateValue);
+				candidates1.add((double) candidateValue);
 				
 				system.addInequalityCandidate(inequality, candidates);
 				system.addInequalityCandidate(inequality1, candidates1);

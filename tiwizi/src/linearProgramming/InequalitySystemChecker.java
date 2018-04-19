@@ -19,12 +19,12 @@ public class InequalitySystemChecker {
 	 * @return
 	 */
 	
-	public static int solveInequality(Inequality inequality, ArrayList<Integer> candidateValues){
+	public static double solveInequality(Inequality inequality, ArrayList<Double> candidateValues){
 		
 		assert inequality.getPosition()==candidateValues.size(): 
 			" not enough candidate values: "+ inequality.getPosition()+ " != "+candidateValues.size();
 		
-		int result=0;
+		double result=0;
 		
 		for (int i=0; i<candidateValues.size();i++){
 			result= result + candidateValues.get(i)*inequality.getCoefficients()[i];
@@ -49,11 +49,11 @@ public class InequalitySystemChecker {
 	 * @throws UnknownOperandForInequality 
 	 */
 	public static boolean isInequalityConsistent(Inequality inequality, 
-			ArrayList<Integer> candidateValues) throws UnknownOperandForInequality{
+			ArrayList<Double> candidateValues) throws UnknownOperandForInequality{
 		
 		boolean result = false;
 		
-		int valueOfLeftSide = solveInequality(inequality, candidateValues);
+		double valueOfLeftSide = solveInequality(inequality, candidateValues);
 		
 		switch (inequality.getOperand()){
 			case "<=": if(valueOfLeftSide<=0) return true; else return false;
@@ -98,5 +98,17 @@ public class InequalitySystemChecker {
 		}
 		
 		return problems;
-	}	
+	}
+	
+	public static String printMetProblems(ArrayList<MetProblem> problems){
+		
+		String res="";
+		
+		for(MetProblem problem: problems){
+			res= res+ problem.toString() + "\n";
+		}
+		return res;
+		
+		
+	}
 }

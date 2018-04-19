@@ -18,7 +18,7 @@ public class InequalityTests {
 	public void CreateOneUnknownEquation(){
 		Inequality equation = new Inequality("<=");
 		equation.addVariable("Room", 2);
-		assertEquals("2*Room <= 0", equation.toString());
+		assertEquals("2.0*Room <= 0", equation.toString());
 	}
 	
 	@Test 
@@ -26,7 +26,7 @@ public class InequalityTests {
 		Inequality equation = new Inequality("<=");
 		equation.addVariable("House", 0);
 		equation.addVariable("Room", -1);
-		assertEquals("0*House -1*Room <= 0", equation.toString());
+		assertEquals("0.0*House -1.0*Room <= 0", equation.toString());
 	}
 	
 	@Test 
@@ -34,7 +34,7 @@ public class InequalityTests {
 		Inequality equation = new Inequality("<=");
 		equation.addVariable("House", 1);
 		equation.addVariable("Room", 1);
-		assertEquals("1*House +1*Room <= 0", equation.toString());
+		assertEquals("1.0*House +1.0*Room <= 0", equation.toString());
 	}
 	
 	@Test 
@@ -42,7 +42,7 @@ public class InequalityTests {
 		Inequality equation = new Inequality("<=");
 		equation.addVariable("House", -1);
 		equation.addVariable("Room", -1);
-		assertEquals("-1*House -1*Room <= 0", equation.toString());
+		assertEquals("-1.0*House -1.0*Room <= 0", equation.toString());
 	}
 	
 	@Test 
@@ -51,7 +51,7 @@ public class InequalityTests {
 		equation.addVariable("Room1", 1);
 		equation.addVariable("Room2", 1);
 		equation.addVariable("House", -2);
-		assertEquals("1*Room1 +1*Room2 -2*House <= 0", equation.toString());
+		assertEquals("1.0*Room1 +1.0*Room2 -2.0*House <= 0", equation.toString());
 	}
 
 }

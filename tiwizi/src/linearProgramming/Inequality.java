@@ -20,7 +20,7 @@ public class Inequality {
 	private int MAX=10;
 	
 	private String [] unknowns;
-	private int [] coefficients;
+	private double [] coefficients;
 	private String operand;
 	private int position;
 	 
@@ -32,7 +32,7 @@ public class Inequality {
 	public Inequality(String operand){
 		this.operand=operand;
 		unknowns= new String[MAX];
-		coefficients = new int[MAX];
+		coefficients = new double[MAX];
 		position=0;
 	}
 	
@@ -53,7 +53,7 @@ public class Inequality {
 		return unknowns;
 	}
 
-	public int[] getCoefficients() {
+	public double[] getCoefficients() {
 		return coefficients;
 	}
 

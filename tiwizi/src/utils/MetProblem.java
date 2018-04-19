@@ -13,10 +13,10 @@ import linearProgramming.*;
 public class MetProblem {
 	
 	private Inequality inequality;
-	private ArrayList<Integer> candidates;
+	private ArrayList<Double> candidates;
 	private String message;
 	
-	public MetProblem(Inequality inequality, ArrayList<Integer> candidates){
+	public MetProblem(Inequality inequality, ArrayList<Double> candidates){
 		this.inequality=inequality;
 		this.candidates=candidates;
 		setMessage();
@@ -66,7 +66,7 @@ public class MetProblem {
 		return inequality;
 	}
 
-	public ArrayList<Integer> getCandidates() {
+	public ArrayList<Double> getCandidates() {
 		return candidates;
 	}
 

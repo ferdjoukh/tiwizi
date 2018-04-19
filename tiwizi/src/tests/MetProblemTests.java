@@ -17,9 +17,9 @@ public class MetProblemTests {
 		equation.addVariable("Wall", 1);
 		equation.addVariable("Room", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(5);
-		candidate.add(1);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double) 5);
+		candidate.add((double) 1);
 		
 		MetProblem problem= new MetProblem(equation,candidate);
 		
@@ -35,9 +35,9 @@ public class MetProblemTests {
 		equation.addVariable("Wall", 1);
 		equation.addVariable("Room", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(5);
-		candidate.add(1);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double) 5);
+		candidate.add((double) 1);
 		
 		MetProblem problem= new MetProblem(equation,candidate);
 		
@@ -53,9 +53,9 @@ public class MetProblemTests {
 		equation.addVariable("Wall", 1);
 		equation.addVariable("Room", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(5);
-		candidate.add(1);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double) 5);
+		candidate.add((double) 1);
 		
 		MetProblem problem= new MetProblem(equation,candidate);
 		
@@ -71,9 +71,9 @@ public class MetProblemTests {
 		equation.addVariable("Wall", 1);
 		equation.addVariable("Room", -4);
 		
-		ArrayList<Integer> candidate= new ArrayList<Integer>();
-		candidate.add(5);
-		candidate.add(1);
+		ArrayList<Double> candidate= new ArrayList<Double>();
+		candidate.add((double) 5);
+		candidate.add((double) 1);
 		
 		MetProblem problem= new MetProblem(equation,candidate);
 		

@@ -180,8 +180,6 @@ public class ModelReader {
 										
 			}
 		}
-		
-		
 		return cls;
 	}
 	
