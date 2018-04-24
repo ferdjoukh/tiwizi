@@ -301,6 +301,32 @@ public class ModelReader {
 		return refs;
     }
 	
+	public List<EReference> getUniDirectionRefsFromClass(EClass c){
+		ArrayList<EReference> refs= new ArrayList<EReference>();
+		
+		for (EReference ref: c.getEAllReferences())
+		{
+			if(ref.getEOpposite()==null)
+				refs.add(ref);
+		}
+		
+		return refs;
+	}
+	
+	public List<EReference> getBiDirectionRefsFromClass(EClass c){
+		ArrayList<EReference> refs= new ArrayList<EReference>();
+		
+		for (EReference ref: c.getEAllReferences())
+		{
+			if(ref.getEOpposite()!=null)
+				refs.add(ref);
+		}
+		
+		return refs;
+	}
+	
+
+	
 	public List<EReference> getAllReferencesFromClasswithOpposite(EClass c)
 	{
 		ArrayList<EReference> refs= new ArrayList<EReference>();

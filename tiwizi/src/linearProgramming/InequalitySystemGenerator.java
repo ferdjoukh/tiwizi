@@ -22,7 +22,7 @@ public class InequalitySystemGenerator {
 	private ArrayList<Integer> classSizes;
 	private InequalitySystem system;
 	
-	private ArrayList<String> inequalities= new ArrayList<String>();
+	//private ArrayList<String> inequalities= new ArrayList<String>();
 	
 	/**
 	 * It creates an object of type InequalitySystemGenerator.
@@ -58,10 +58,7 @@ public class InequalitySystemGenerator {
 	public void createInequalitySystem(){
 		
 		for(EClass c: modelreader.getClasses()){
-			
-			int n= modelreader.getAllReferencesFromClasswithOpposite(c).size();
-			System.out.println(n);
-			
+						
 			System.out.println(c.getName());
 			for (EReference r: modelreader.getAllReferencesFromClass(c)){
 				System.out.println("    "+r.getName());

@@ -6,7 +6,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ InequalitySystemCheckerTest.class, InequalityTests.class, 
-	MetProblemTests.class, InequalitySystemGeneratorTests.class, solverHouseMetamodelTests.class })
+	MetProblemTests.class, InequalitySystemGeneratorTests.class, 
+	solverHouseMetamodelTests.class, ModelReaderTests.class })
 public class AllTests {
 
 }
