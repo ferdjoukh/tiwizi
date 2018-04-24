@@ -19,8 +19,8 @@ public class InequalitySystemCheckerTest {
 	@Test
 	public void createFirstChecker(){
 		Inequality equation = new Inequality("<=");
-		equation.addVariable("Wall", 4);
-		equation.addVariable("Room", -1);
+		equation.addVariable("Wall", 4.0);
+		equation.addVariable("Room", -1.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)1);
@@ -33,8 +33,8 @@ public class InequalitySystemCheckerTest {
 	@Test
 	public void OneMoreExample(){
 		Inequality equation = new Inequality("<=");
-		equation.addVariable("H", 0);
-		equation.addVariable("R", -1);
+		equation.addVariable("H", 0.0);
+		equation.addVariable("R", -1.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)1);
@@ -47,8 +47,8 @@ public class InequalitySystemCheckerTest {
 	@Test
 	public void OneMoreExample2(){
 		Inequality equation = new Inequality("<=");
-		equation.addVariable("R", 1);
-		equation.addVariable("H", -4);
+		equation.addVariable("R", 1.0);
+		equation.addVariable("H", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)1);
@@ -64,8 +64,8 @@ public class InequalitySystemCheckerTest {
 	public void lessOrEqualTrue() throws UnknownOperandForInequality{
 		
 		Inequality equation = new Inequality("<=");
-		equation.addVariable("x", 2);
-		equation.addVariable("y", -4);
+		equation.addVariable("x", 2.0);
+		equation.addVariable("y", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)1);
@@ -79,8 +79,8 @@ public class InequalitySystemCheckerTest {
 	public void unknownOperand() throws UnknownOperandForInequality{
 		
 		Inequality equation = new Inequality("ww");
-		equation.addVariable("x", 2);
-		equation.addVariable("y", -4);
+		equation.addVariable("x", 2.0);
+		equation.addVariable("y", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)1);
@@ -93,8 +93,8 @@ public class InequalitySystemCheckerTest {
 	public void lessOrEqualFalse() throws UnknownOperandForInequality{
 		
 		Inequality equation = new Inequality("<=");
-		equation.addVariable("x", 2);
-		equation.addVariable("y", -4);
+		equation.addVariable("x", 2.0);
+		equation.addVariable("y", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)3);
@@ -110,8 +110,8 @@ public class InequalitySystemCheckerTest {
 	public void greaterOrEqualTrue() throws UnknownOperandForInequality{
 		
 		Inequality equation = new Inequality(">=");
-		equation.addVariable("x", 2);
-		equation.addVariable("y", -4);
+		equation.addVariable("x", 2.0);
+		equation.addVariable("y", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)2);
@@ -127,8 +127,8 @@ public class InequalitySystemCheckerTest {
 	public void greaterOrEqualFalse() throws UnknownOperandForInequality{
 		
 		Inequality equation = new Inequality(">=");
-		equation.addVariable("x", 2);
-		equation.addVariable("y", -4);
+		equation.addVariable("x", 2.0);
+		equation.addVariable("y", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)2);
@@ -144,8 +144,8 @@ public class InequalitySystemCheckerTest {
 	public void equalTrue() throws UnknownOperandForInequality{
 		
 		Inequality equation = new Inequality("=");
-		equation.addVariable("x", 2);
-		equation.addVariable("y", -4);
+		equation.addVariable("x", 2.0);
+		equation.addVariable("y", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)2);
@@ -162,8 +162,8 @@ public class InequalitySystemCheckerTest {
 	public void equalFalse() throws UnknownOperandForInequality{
 		
 		Inequality equation = new Inequality("=");
-		equation.addVariable("x", 2);
-		equation.addVariable("y", -4);
+		equation.addVariable("x", 2.0);
+		equation.addVariable("y", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)2);
@@ -177,9 +177,9 @@ public class InequalitySystemCheckerTest {
 	@Test 
 	public void checkWholeSystem() throws UnknownOperandForInequality{
 		Inequality equation = new Inequality("<=");
-		equation.addVariable("Wall", 1);
-		equation.addVariable("Door", 2);
-		equation.addVariable("Room", -4);
+		equation.addVariable("Wall", 1.0);
+		equation.addVariable("Door", 2.0);
+		equation.addVariable("Room", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double)5);
@@ -187,16 +187,16 @@ public class InequalitySystemCheckerTest {
 		candidate.add((double)3);
 		
 		Inequality equation2 = new Inequality("<=");
-		equation2.addVariable("Room", 1);
-		equation2.addVariable("House", -4);
+		equation2.addVariable("Room", 1.0);
+		equation2.addVariable("House", -4.0);
 		
 		ArrayList<Double> candidate2= new ArrayList<Double>();
 		candidate2.add((double)5);
 		candidate2.add((double)1);
 		
 		Inequality equation3 = new Inequality("<=");
-		equation3.addVariable("House", 4);
-		equation3.addVariable("Wall", -1);
+		equation3.addVariable("House", 4.0);
+		equation3.addVariable("Wall", -1.0);
 				
 		ArrayList<Double> candidate3= new ArrayList<Double>();
 		candidate3.add((double)2);

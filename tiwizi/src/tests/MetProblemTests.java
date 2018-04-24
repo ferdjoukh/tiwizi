@@ -14,8 +14,8 @@ public class MetProblemTests {
 	public void createSingleTest(){
 				
 		Inequality equation = new Inequality("<=");
-		equation.addVariable("Wall", 1);
-		equation.addVariable("Room", -4);
+		equation.addVariable("Wall", 1.0);
+		equation.addVariable("Room", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double) 5);
@@ -32,8 +32,8 @@ public class MetProblemTests {
 	public void createSingleTest2(){
 				
 		Inequality equation = new Inequality("<");
-		equation.addVariable("Wall", 1);
-		equation.addVariable("Room", -4);
+		equation.addVariable("Wall", 1.0);
+		equation.addVariable("Room", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double) 5);
@@ -50,8 +50,8 @@ public class MetProblemTests {
 	public void createSingleTest3(){
 				
 		Inequality equation = new Inequality(">=");
-		equation.addVariable("Wall", 1);
-		equation.addVariable("Room", -4);
+		equation.addVariable("Wall", 1.0);
+		equation.addVariable("Room", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double) 5);
@@ -68,8 +68,8 @@ public class MetProblemTests {
 	public void createSingleTest4(){
 				
 		Inequality equation = new Inequality(">");
-		equation.addVariable("Wall", 1);
-		equation.addVariable("Room", -4);
+		equation.addVariable("Wall", 1.0);
+		equation.addVariable("Room", -4.0);
 		
 		ArrayList<Double> candidate= new ArrayList<Double>();
 		candidate.add((double) 5);

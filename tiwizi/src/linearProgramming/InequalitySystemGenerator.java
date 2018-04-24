@@ -60,7 +60,9 @@ public class InequalitySystemGenerator {
 		for(EClass c: modelreader.getClasses()){
 						
 			System.out.println(c.getName());
-			for (EReference r: modelreader.getAllReferencesFromClass(c)){
+			
+			//Create Inequalities for unidirectional references
+			for (EReference r: modelreader.getUniDirectionRefsFromClass(c)){
 				System.out.println("    "+r.getName());
 				
 				int ub= configreader.getRefsBound();
@@ -68,53 +70,50 @@ public class InequalitySystemGenerator {
 					ub=r.getUpperBound();
 				}
 				
-				String inlower= r.getLowerBound()+"*"+c.getName()+" <= "+ r.getEType().getName();
-				String inUpper= r.getEType().getName() + " <= "+ ub+"*"+c.getName();
-				inequalities.add(inlower);
-				inequalities.add(inUpper);
+				Inequality inequality=  createInequality("<=",c.getName(), (double) r.getLowerBound(),r.getEType().getName(), (double) -1);
+				ArrayList<Double> candidates= createCandidates((double) classSizes.get(modelreader.getClassIndex(c.getName())-1), 
+									(double) classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1));
 				
-				Inequality inequality= new Inequality("<=");
-				inequality.addVariable(c.getName(), r.getLowerBound());
-				inequality.addVariable(r.getEType().getName(), -1);
+				Inequality inequality1= createInequality("<=",r.getEType().getName(), (double) 1,c.getName(), (double) -ub);
 				
-				ArrayList<Double> candidates= new ArrayList<Double>();
-				int candidateValue= classSizes.get(modelreader.getClassIndex(c.getName())-1);
-				candidates.add((double) candidateValue);
-				
-				candidateValue= classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1);
-				candidates.add((double) candidateValue);
-				
-				Inequality inequality1= new Inequality("<=");
-				inequality1.addVariable(r.getEType().getName(), 1);
-				inequality1.addVariable(c.getName(), -ub);
-				
-				ArrayList<Double> candidates1= new ArrayList<Double>();
-				candidateValue= classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1);
-				candidates1.add((double) candidateValue);
-	
-				candidateValue= classSizes.get(modelreader.getClassIndex(c.getName())-1);		
-				candidates1.add((double) candidateValue);
+				ArrayList<Double> candidates1= createCandidates(
+						(double) classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1),
+						(double) classSizes.get(modelreader.getClassIndex(c.getName())-1));
 				
 				system.addInequalityCandidate(inequality, candidates);
 				system.addInequalityCandidate(inequality1, candidates1);
 				
 				System.out.println("          "+inequality.toString());
-				System.out.println("          "+inequality1.toString());
-				
+				System.out.println("          "+inequality1.toString());	
 			}
+			
+			//Create Inequalities for BiDirectional references
+			for (EReference r: modelreader.getBiDirectionRefsFromClass(c)){
+				System.out.println("    "+r.getName());
+			
+			}
+			
 		}
+	}
+	
+	private Inequality createInequality(String operand, String var1, Double coeff1, String var2, Double coeff2){
 		
+		Inequality inequality = new Inequality(operand);
+		inequality.addVariable(var1, coeff1);
+		inequality.addVariable(var1, coeff1);
+				
+		return inequality;
+	}
+	
+	private ArrayList<Double> createCandidates(Double candidate1, Double candidate2){
+		
+		ArrayList<Double> candidates= new ArrayList<Double>();
+		candidates.add(candidate1);
+		candidates.add(candidate2);
+		
+		return candidates;
 	}
 				
-	public String toString(){
-		
-		String res="Inequality System:";
-		for( String s: inequalities){
-			res=res+"\n"+s;
-		}
-		return res;
-	}
-
 	public String getMetamodel() {
 		return metamodel;
 	}

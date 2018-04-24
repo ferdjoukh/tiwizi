@@ -41,11 +41,11 @@ public class Inequality {
 	 * It adds a new variable to the inequality
 	 *  
 	 * @param unknown x,y,...
-	 * @param coeff 0,1,2,-1,....
+	 * @param coeff1 0,1,2,-1,....
 	 */
-	public void addVariable(String unknown,int coeff){
+	public void addVariable(String unknown,Double coeff1){
 		unknowns[position]=unknown;
-		coefficients[position]=coeff;
+		coefficients[position]=coeff1;
 		position++;
 	}
 
