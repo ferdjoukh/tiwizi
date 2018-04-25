@@ -57,13 +57,19 @@ public class InequalitySystemGenerator {
 	 */
 	public void createInequalitySystem(){
 		
+		createSubSystemForUniDirectionReferences();
+		createSubSystemforBiDirectionReferences();
+	}
+	
+	public void createSubSystemForUniDirectionReferences(){
+		
 		for(EClass c: modelreader.getClasses()){
 						
-			System.out.println(c.getName());
+			//System.out.println(c.getName());
 			
 			//Create Inequalities for unidirectional references
 			for (EReference r: modelreader.getUniDirectionRefsFromClass(c)){
-				System.out.println("    "+r.getName());
+				//System.out.println("    "+r.getName());
 				
 				int ub= configreader.getRefsBound();
 				if(r.getUpperBound()!=-1){
@@ -83,16 +89,54 @@ public class InequalitySystemGenerator {
 				system.addInequalityCandidate(inequality, candidates);
 				system.addInequalityCandidate(inequality1, candidates1);
 				
-				System.out.println("          "+inequality.toString());
-				System.out.println("          "+inequality1.toString());	
+				//System.out.println("          "+inequality.toString());
+				//System.out.println("          "+inequality1.toString());	
 			}
+		}
+	}
+	
+	private void createSubSystemforBiDirectionReferences(){
+		
+		for(EClass c: modelreader.getClasses()){
+			
+			//System.out.println(c.getName());
 			
 			//Create Inequalities for BiDirectional references
 			for (EReference r: modelreader.getBiDirectionRefsFromClass(c)){
-				System.out.println("    "+r.getName());
-			
+				//System.out.println("Bi    "+r.getName());
+				
+				int ub= configreader.getRefsBound();
+				if(r.getUpperBound()!=-1){
+					ub=r.getUpperBound();
+				}
+				
+				int ubO= configreader.getRefsBound();
+				if(r.getEOpposite().getUpperBound()!=-1){
+					ubO=r.getEOpposite().getUpperBound();
+				}
+				
+				double coeff1= (double) r.getLowerBound()/ubO;
+				double coeff2= -1;
+				
+				Inequality inequality= createInequality("<=", c.getName(), coeff1, r.getEType().getName(), coeff2);
+				ArrayList<Double> candidates= createCandidates((double) classSizes.get(modelreader.getClassIndex(c.getName())-1), 
+						(double) classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1));
+				
+				
+				coeff1= 1;
+				coeff2=(double) -ub/r.getEOpposite().getLowerBound();
+				
+				Inequality inequality1= createInequality("<=",  r.getEType().getName(), coeff1,c.getName(), coeff2);
+				ArrayList<Double> candidates1= createCandidates(
+						(double) classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1),
+						(double) classSizes.get(modelreader.getClassIndex(c.getName())-1));
+				
+				system.addInequalityCandidate(inequality, candidates);
+				system.addInequalityCandidate(inequality1, candidates1);
+				
+				//System.out.println("          "+inequality.toString());
+				//System.out.println("          "+inequality1.toString());					
 			}
-			
 		}
 	}
 	
@@ -100,7 +144,7 @@ public class InequalitySystemGenerator {
 		
 		Inequality inequality = new Inequality(operand);
 		inequality.addVariable(var1, coeff1);
-		inequality.addVariable(var1, coeff1);
+		inequality.addVariable(var2, coeff2);
 				
 		return inequality;
 	}
