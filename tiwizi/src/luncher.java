@@ -1,16 +1,19 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import Exceptions.UnknownClassName;
 import Exceptions.UnknownConfigFile;
 import Exceptions.UnknownMetamodel;
+import Exceptions.UnknownOperandForInequality;
+import linearProgramming.InequalitySystemChecker;
 import linearProgramming.InequalitySystemGenerator;
 import utils.*;
 
 public class luncher {
 
-	public static void main(String[] args) throws UnknownConfigFile, UnknownMetamodel, UnknownClassName {
+	public static void main(String[] args) throws UnknownConfigFile, UnknownMetamodel, UnknownClassName, UnknownOperandForInequality {
 		// TODO Auto-generated method stub
 		
 		//Give meta-model file path
@@ -44,9 +47,11 @@ public class luncher {
 				throw new UnknownConfigFile(configFile);
 		}else{
 					
-			InequalitySystemGenerator generator= new InequalitySystemGenerator(metamodel, rootClass, configFile);
-			generator.createInequalitySystem();
-			System.out.println(generator);
+			InequalitySystemGenerator isg= new InequalitySystemGenerator(metamodel, rootClass, configFile);
+			isg.createInequalitySystem();
+			ArrayList<MetProblem> problems= InequalitySystemChecker.checkAllSystem(isg.getSystem());
+			System.out.println(InequalitySystemChecker.printMetProblems(problems));
+			
 		}
 		
 	}

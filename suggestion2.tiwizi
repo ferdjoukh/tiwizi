@@ -1,0 +1,13 @@
+--references
+rooms: House []->[1..5] Room
+
+--inequalities
+House <= Room
+Room <= 5*House 
+
+--candidate values
+[House=1, Room=6]
+
+--fixing suggestions 
+Please reconsider cardinalities for reference [rooms] >> upperBound++
+Please reconsider number of instances >> more [House] or Less [Room]
