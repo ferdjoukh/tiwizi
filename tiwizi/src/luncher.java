@@ -45,13 +45,11 @@ public class luncher {
 			
 			if(!configFileExists)
 				throw new UnknownConfigFile(configFile);
-		}else{
-					
+		}else{					
 			InequalitySystemGenerator isg= new InequalitySystemGenerator(metamodel, rootClass, configFile);
 			isg.createInequalitySystem();
 			ArrayList<MetProblem> problems= InequalitySystemChecker.checkAllSystem(isg.getSystem());
-			System.out.println(InequalitySystemChecker.printMetProblems(problems));
-			
+			System.out.println(InequalitySystemChecker.printMetProblems(problems));			
 		}
 		
 	}

@@ -76,7 +76,7 @@ public class MetProblem {
 	
 	public String toString(){
 		
-		String res= inequality.toString()+ " " +candidates.toString()+ " >> " + message;
+		String res= inequality.toString()+ " " +candidates.toString()+ "\n\t\t >> " + message;
 		return res;
 	}
 }
