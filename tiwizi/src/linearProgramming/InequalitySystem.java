@@ -31,6 +31,11 @@ public class InequalitySystem {
 		return candidates;
 	}
 	
+	public int getNumberofLI(){
+		
+		return inequalities.size();
+	}
+	
 	/**
 	 * It prints the InequlaitySystem
 	 * 

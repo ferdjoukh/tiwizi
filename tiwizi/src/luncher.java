@@ -30,7 +30,6 @@ public class luncher {
 			metamodel=args[0];
 			rootClass=args[1];
 			configFile=args[2];
-			
 		}else{
 			System.out.println("Use the appropriate number of arguments (3)");
 		}
@@ -45,11 +44,24 @@ public class luncher {
 			
 			if(!configFileExists)
 				throw new UnknownConfigFile(configFile);
-		}else{					
+		}else{			
+			System.out.println("TIWIZI is checking the consistency \n\t\tof ["+ metamodel+ "] metamodel\n\t\tand ["+ configFile +"] config file...");
+			System.out.println("");
 			InequalitySystemGenerator isg= new InequalitySystemGenerator(metamodel, rootClass, configFile);
 			isg.createInequalitySystem();
+			System.out.println("System of Linear Inequalities ("+ isg.getSystem().getNumberofLI() +" L.I.) has been generated...");			
+			System.out.println("");
 			ArrayList<MetProblem> problems= InequalitySystemChecker.checkAllSystem(isg.getSystem());
-			System.out.println(InequalitySystemChecker.printMetProblems(problems));			
+			
+			if(problems.size()==0) {
+				System.out.println("Success :) No anomaly found :)");
+			}
+			else {
+				System.out.println("Failure :( Anomalies were detected :(");
+				System.out.println("Fixing suggestions:");
+				System.out.println("");
+				System.out.println(InequalitySystemChecker.printMetProblems(problems));	
+			}
 		}
 		
 	}
