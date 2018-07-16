@@ -16,26 +16,32 @@ public class ConfigFileGenerator {
 	
 	private String mm;
 	private String rootClass;
+	private String configFile;
 	private ModelReader modelReader;
-	
 	
 	public ConfigFileGenerator(String mm, String rootClass)
 	{
 		this.mm = mm;
+		this.rootClass = rootClass;	
+		this.configFile= rootClass+"/"+rootClass+".grimm";
+	}
+	
+	public ConfigFileGenerator(String mm, String rootClass, String configFile)
+	{
+		this.mm = mm;
 		this.rootClass = rootClass;
-		modelReader = new ModelReader(mm, rootClass, 2, 2);
+		this.configFile= configFile;
 	}
 	
 	public void generate() throws IOException
 	{
-		String filePath= rootClass+".grimm";
+		modelReader = new ModelReader(mm, rootClass, 2, 2);
 		new File(rootClass).mkdir();
-	
-		PrintWriter ecrivain =  new PrintWriter(new BufferedWriter(new FileWriter(rootClass+"/"+filePath)));
+		PrintWriter ecrivain =  new PrintWriter(new BufferedWriter(new FileWriter(this.configFile)));
 		
-		ecrivain.write("%This is a configuration file for Grimm Tool \n");
+		ecrivain.write("%This is a configuration file for Grimm and TIWIZI Tool \n");
 		ecrivain.write("%Please do not change the ordering or the name of any element !\n");
-		ecrivain.write("%Put a numerical value instead of 0, lower, upper, a and z \n");
+		ecrivain.write("%Replace all 0 by positive integer values\n");
 		
 		ecrivain.write("% \n");
 		ecrivain.write("% \n");
@@ -81,9 +87,6 @@ public class ConfigFileGenerator {
 		
 		
 		ecrivain.close();
-		
-		System.out.println(" OK");
-		System.out.println("\tConfiguration file: \""+rootClass+"/"+ filePath + "\" was generated !");
 		
 	}
 }

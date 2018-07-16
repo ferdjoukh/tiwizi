@@ -13,25 +13,110 @@ import utils.*;
 
 public class luncher {
 
-	public static void main(String[] args) throws UnknownConfigFile, UnknownMetamodel, UnknownClassName, UnknownOperandForInequality {
+	public static void main(String[] args) throws UnknownConfigFile, UnknownMetamodel, UnknownClassName, UnknownOperandForInequality, IOException {
 		// TODO Auto-generated method stub
 		
-		//Give meta-model file path
-		//Give rootClass
-		//Give configFile path
-		String metamodel = "",rootClass="",configFile="";
 		
-		//if args are given use them, otherwise use default ones
+		//Args:
+		// 0 >> options string -h, -g, -c, -cv
+		// 1 >> metamodelFilePath
+		// 2 >> rootClass
+		// 3 >> configFilePath
+		//
+		// if option = "-h", print help
+		// if no parameters are given, use default meta-model and quick check
+		String metamodel = "",rootClass="",configFile="";
+		boolean verbose;
+		
 		if(args.length==0){
-			metamodel = "model/simpleHouse.ecore";
+			
+			//if no parameters, lunch quick mode
+			System.out.println("Quick test mode (requires: simpleHouse.ecore and House.grimm files)");
+			System.out.println("");
+			System.out.println("\ttip: type tiwizi -h for help");
+			System.out.println("");
+			
+			metamodel = "simpleHouse.ecore";
 			rootClass = "House";
-			configFile = "confFiles/House1.grimm";
-		}else if(args.length==3){
-			metamodel=args[0];
-			rootClass=args[1];
-			configFile=args[2];
+			configFile = "House.grimm";
+		
+		}else if(args.length==1){
+			
+			//Help mode or problem
+			if(args[0].equals("-h")){
+				System.out.println("TIWIZI");
+				System.out.println("\tis a Fault Localizer during model generation"
+						+ "\n\tThe goal is to give you fixing suggestions to get a succesful generation.");
+				
+				System.out.println("");
+				System.out.println("USE");
+				System.out.println("\ttiwizi -[options string] meta-model rootClass configFile");
+				
+				System.out.println("");				
+				System.out.println("PARAMETERS");
+				
+				System.out.println("\tall 4 parameters are mandatory");
+				System.out.println("");				
+				
+				System.out.println("\t[-options]");
+				System.out.println("\t\t-g generate a configuration file (filepath=configFile)");				
+				System.out.println("\t\t-c check consistency with given meta-model, rootClass and configFile");
+				System.out.println("\t\t-v Verbose mode. Create .tiwizi file containing all log information"
+						+ "\n\t\t    and a pdf file gathering all fixing suggestions with syntax highlighting");				
+				
+				System.out.println("\tmeta-model");
+				System.out.println("\t\tEcore meta-model filepath");
+				
+				System.out.println("\trootClass");
+				System.out.println("\t\trootClass of given meta-model");
+				
+				System.out.println("\tconfigFile");
+				System.out.println("\t\t.grimm configuration File");
+				
+				System.out.println("");				
+								
+				System.out.println("EXAMPLES of possible combinations");
+				System.out.println("\ttiwizi -g cooking.ecore Kitchen cooking.grimm");
+				System.out.println("\ttiwizi -c cooking.ecore Kitchen cooking.grimm");
+				System.out.println("\ttiwizi -cv cooking.ecore Kitchen cooking.grimm");				
+			
+			}else{
+				System.out.println("Unknown option");
+				System.out.println("\ttip: type tiwizi -h for help");
+			}
+			return;
+			
+		}else if(args.length==4){
+			//Decode option string contained in args[0]
+			metamodel=args[1];
+			rootClass=args[2];
+			configFile=args[3];
+			
+			if(args[0].equals("-g")) {
+				System.out.println("TIWIZI is generating a pre-filled configuration file...");
+				
+				//Call configFileGenerator
+				ConfigFileGenerator cfg= new ConfigFileGenerator(metamodel, rootClass, configFile);
+				cfg.generate();
+				
+				System.out.println("");
+				System.out.println("["+configFile+"] was generated");
+				
+				return;
+			}else if(args[0].equals("-c")){
+				
+				verbose = false;
+				
+			}else if(args[0].equals("-cv")){
+				
+				verbose=true;
+				
+			}else{
+				System.out.println("Unknown option ("+args[0]+")");
+				return;
+			}
 		}else{
-			System.out.println("Use the appropriate number of arguments (3)");
+			System.out.println("Inappropriate number of arguments (0, 1 or 4 parameters only)");
 		}
 		
 		//Check the existance of given files
