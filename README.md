@@ -21,24 +21,24 @@ After that, a *pdf-creator* collects all the suggestions computed by TIWIZI and 
 
 # Run TIWIZI
 
-To run tiwizi, you should download the *tiwizi.jar* file or compile the project 
+To run tiwizi, you should download the **tiwizi.jar** file or compile the project 
 
 ## Quick start
 	
 	We provide a toy example (simpleHouse.ecore metamodel and House.grimm configuration file)
 	You can run it quickly if you type this command without parameters:
 
-	```
-	java -jar tiwizi.jar
-	```
+```
+java -jar tiwizi.jar
+```
 
 ## Help
 
 	Type this command to get help:
 
-	```
-	java -jar tiwizi.jar -h
-	```
+```
+java -jar tiwizi.jar -h
+```
 
 ## USE
 	tiwizi -[options string] meta-model rootClass configFile
@@ -59,6 +59,8 @@ To run tiwizi, you should download the *tiwizi.jar* file or compile the project
 		.grimm configuration File
 
 ## EXAMPLES of possible combinations
+	tiwizi
+	tiwizi -h
 	tiwizi -g cooking.ecore Kitchen cooking.grimm
 	tiwizi -c cooking.ecore Kitchen cooking.grimm
 	tiwizi -cv cooking.ecore Kitchen cooking.grimm
