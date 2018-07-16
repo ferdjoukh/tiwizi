@@ -26,9 +26,9 @@ After that, a *pdf-creator* collects all the suggestions computed by TIWIZI and 
 	We provide a toy example (simpleHouse.ecore metamodel and House.grimm configuration file)
 	You can run it quickly if you type this command without parameters:
 
-'''
+```
 tiwizi
-'''
+```
 
 
 
