@@ -34,9 +34,6 @@ echo $2".tex was generated"
 pdflatex $2".tex"
 pdflatex $2".tex"
 
-rm $2".log"
-rm $2".aux"
-
 echo $2".pdf was generated" 
 
 fi			

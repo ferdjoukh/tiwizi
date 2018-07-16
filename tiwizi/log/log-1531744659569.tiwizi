@@ -1,8 +1,0 @@
-1.0*Room -5.0*House <= 0 [6.0, 1.0]
-		 >> More [House] or Less [Room]
-1.0*Wall -5.0*House <= 0 [6.0, 1.0]
-		 >> More [House] or Less [Wall]
-2.0*Room -1.0*Wall <= 0 [6.0, 6.0]
-		 >> More [Wall] or Less [Room]
-1.0*Room -0.5*Wall <= 0 [6.0, 6.0]
-		 >> More [Wall] or Less [Room]

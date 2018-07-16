@@ -134,7 +134,18 @@ public class InequalitySystemChecker {
 		
 	}
 	
-	public static void createRecapPDF(String logFilePath){
+	public static void createRecapPDF(String logFilePath) throws IOException{
+		Runtime runtime= Runtime.getRuntime();
 		
+		String command= "./pdf-creator.sh "+logFilePath+".tiwizi "+logFilePath; 
+		
+		System.out.println("");
+		
+		System.out.println("Exceute this command: "+ command);
+		
+		runtime.exec(command);
+		runtime.exec("mv *.pdf log/");
+		runtime.exec("mv *.log log/");
+		runtime.exec("mv *.aux log/");
 	}
 }
