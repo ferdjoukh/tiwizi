@@ -144,8 +144,5 @@ public class InequalitySystemChecker {
 		System.out.println("Exceute this command: "+ command);
 		
 		runtime.exec(command);
-		runtime.exec("mv *.pdf log/");
-		runtime.exec("mv *.log log/");
-		runtime.exec("mv *.aux log/");
 	}
 }
