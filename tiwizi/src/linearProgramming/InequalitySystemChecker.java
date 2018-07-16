@@ -1,5 +1,11 @@
 package linearProgramming;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import Exceptions.UnknownOperandForInequality;
@@ -108,7 +114,27 @@ public class InequalitySystemChecker {
 			res= res+ problem.toString() + "\n";
 		}
 		return res;
+	}
+	
+	public static String generateLogFile(ArrayList<MetProblem> problems) throws IOException{
 		
+		new File("log").mkdir();
+		long time=System.currentTimeMillis();
+		String logFilePath="log/log-"+time;
+		
+		PrintWriter ecrivain =  new PrintWriter(new BufferedWriter(new FileWriter(logFilePath+".tiwizi")));
+		
+		for(MetProblem problem: problems){
+			 ecrivain.write(problem.verbosePrint() + "\n");
+		}
+		
+		ecrivain.close();
+		
+		return logFilePath;
+		
+	}
+	
+	public static void createRecapPDF(String logFilePath){
 		
 	}
 }

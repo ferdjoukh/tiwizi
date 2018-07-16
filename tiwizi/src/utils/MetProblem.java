@@ -79,4 +79,10 @@ public class MetProblem {
 		String res= inequality.toString()+ " " +candidates.toString()+ "\n\t\t >> " + message;
 		return res;
 	}
+	
+	public String verbosePrint() {
+		
+		String res= inequality.toString()+ " " +candidates.toString()+ "\n\t\t >> " + message;
+		return res;
+	}
 }

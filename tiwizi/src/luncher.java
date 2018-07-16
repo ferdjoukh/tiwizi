@@ -26,7 +26,7 @@ public class luncher {
 		// if option = "-h", print help
 		// if no parameters are given, use default meta-model and quick check
 		String metamodel = "",rootClass="",configFile="";
-		boolean verbose;
+		boolean verbose=false;
 		
 		if(args.length==0){
 			
@@ -76,6 +76,8 @@ public class luncher {
 				System.out.println("");				
 								
 				System.out.println("EXAMPLES of possible combinations");
+				System.out.println("\ttiwizi");
+				System.out.println("\ttiwizi -h");
 				System.out.println("\ttiwizi -g cooking.ecore Kitchen cooking.grimm");
 				System.out.println("\ttiwizi -c cooking.ecore Kitchen cooking.grimm");
 				System.out.println("\ttiwizi -cv cooking.ecore Kitchen cooking.grimm");				
@@ -104,11 +106,9 @@ public class luncher {
 				
 				return;
 			}else if(args[0].equals("-c")){
-				
 				verbose = false;
 				
 			}else if(args[0].equals("-cv")){
-				
 				verbose=true;
 				
 			}else{
@@ -117,6 +117,7 @@ public class luncher {
 			}
 		}else{
 			System.out.println("Inappropriate number of arguments (0, 1 or 4 parameters only)");
+			return;
 		}
 		
 		//Check the existance of given files
@@ -146,6 +147,24 @@ public class luncher {
 				System.out.println("Fixing suggestions:");
 				System.out.println("");
 				System.out.println(InequalitySystemChecker.printMetProblems(problems));	
+			}
+			
+			//For verbose mode
+			if(verbose) {
+				System.out.println("Verbose mode activated");
+				System.out.println("");
+				
+				
+				//Generate the log.tiwizi log file
+				String logFilePath=InequalitySystemChecker.generateLogFile(problems);
+				
+				System.out.println("["+logFilePath+".tiwizi] has been generated");
+				
+				//Create .pdf file
+				InequalitySystemChecker.createRecapPDF(logFilePath);
+				
+				System.out.println("["+logFilePath+".pdf] has been generated");
+				
 			}
 		}
 		
