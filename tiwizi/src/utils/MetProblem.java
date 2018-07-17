@@ -80,9 +80,40 @@ public class MetProblem {
 		return res;
 	}
 	
+	public String printCandidateValues() {
+		String result="";
+		
+		for(int i=0;i<inequality.getPosition();i++){
+				
+			result= result+ inequality.getUnknowns()[i]+"="+candidates.get(i) + " ";
+		}
+		
+		return result;	
+	}
+	
 	public String verbosePrint() {
 		
-		String res= inequality.toString()+ " " +candidates.toString()+ "\n\t\t >> " + message;
+		String res= "";
+		
+		res = res + "--reference\n";
+		res = res + inequality.getReference().getName() + "\n"; //reference name
+		res = res + "\n" ;
+		
+		res = res + "--inequality\n";
+		res = res + inequality.toString() +"\n";
+		res = res + "\n" ;
+		
+		res = res + "--candidate values\n";
+		res = res + printCandidateValues()+ "\n";
+		res = res + "\n" ;
+		
+		res = res + "--fixing suggestions \n" ;
+		res = res + "Please reconsider cardinalities for reference ["+ inequality.getReference().getName() +"]\n" ;
+		res = res + "Please reconsider number of instances >> \n "
+		          + message +"\n" ;
+
+		res = res + "----------------------\n" ;
+		
 		return res;
 	}
 }

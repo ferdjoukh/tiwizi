@@ -126,6 +126,7 @@ public class InequalitySystemChecker {
 		
 		for(MetProblem problem: problems){
 			 ecrivain.write(problem.verbosePrint() + "\n");
+		//	 System.out.println(problem.verbosePrint() + "\n");
 		}
 		
 		ecrivain.close();

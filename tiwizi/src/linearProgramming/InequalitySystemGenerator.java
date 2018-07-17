@@ -76,11 +76,11 @@ public class InequalitySystemGenerator {
 					ub=r.getUpperBound();
 				}
 				
-				Inequality inequality=  createInequality("<=",c.getName(), (double) r.getLowerBound(),r.getEType().getName(), (double) -1);
+				Inequality inequality=  createInequality(r,"<=",c.getName(), (double) r.getLowerBound(),r.getEType().getName(), (double) -1);
 				ArrayList<Double> candidates= createCandidates((double) classSizes.get(modelreader.getClassIndex(c.getName())-1), 
 									(double) classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1));
 				
-				Inequality inequality1= createInequality("<=",r.getEType().getName(), (double) 1,c.getName(), (double) -ub);
+				Inequality inequality1= createInequality(r,"<=",r.getEType().getName(), (double) 1,c.getName(), (double) -ub);
 				
 				ArrayList<Double> candidates1= createCandidates(
 						(double) classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1),
@@ -118,7 +118,7 @@ public class InequalitySystemGenerator {
 				double coeff1= (double) r.getLowerBound()/ubO;
 				double coeff2= -1;
 				
-				Inequality inequality= createInequality("<=", c.getName(), coeff1, r.getEType().getName(), coeff2);
+				Inequality inequality= createInequality(r,"<=", c.getName(), coeff1, r.getEType().getName(), coeff2);
 				ArrayList<Double> candidates= createCandidates((double) classSizes.get(modelreader.getClassIndex(c.getName())-1), 
 						(double) classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1));
 				
@@ -126,7 +126,7 @@ public class InequalitySystemGenerator {
 				coeff1= 1;
 				coeff2=(double) -ub/r.getEOpposite().getLowerBound();
 				
-				Inequality inequality1= createInequality("<=",  r.getEType().getName(), coeff1,c.getName(), coeff2);
+				Inequality inequality1= createInequality(r,"<=",  r.getEType().getName(), coeff1,c.getName(), coeff2);
 				ArrayList<Double> candidates1= createCandidates(
 						(double) classSizes.get(modelreader.getClassIndex(r.getEType().getName())-1),
 						(double) classSizes.get(modelreader.getClassIndex(c.getName())-1));
@@ -143,6 +143,15 @@ public class InequalitySystemGenerator {
 	private Inequality createInequality(String operand, String var1, Double coeff1, String var2, Double coeff2){
 		
 		Inequality inequality = new Inequality(operand);
+		inequality.addVariable(var1, coeff1);
+		inequality.addVariable(var2, coeff2);
+				
+		return inequality;
+	}
+	
+	private Inequality createInequality(EReference reference,String operand, String var1, Double coeff1, String var2, Double coeff2){
+		
+		Inequality inequality = new Inequality(reference, operand);
 		inequality.addVariable(var1, coeff1);
 		inequality.addVariable(var2, coeff2);
 				

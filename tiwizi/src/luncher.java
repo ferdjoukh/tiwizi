@@ -125,11 +125,12 @@ public class luncher {
 		Boolean configFileExists= new File(configFile).isFile();
 		
 		if(!metamodelExists || !configFileExists){
-			if(!metamodelExists)
+			if(!metamodelExists) {
 				throw new UnknownMetamodel(metamodel);
-			
-			if(!configFileExists)
+			}
+			if(!configFileExists) {
 				throw new UnknownConfigFile(configFile);
+			}
 		}else{			
 			System.out.println("TIWIZI is checking the consistency \n\t\tof ["+ metamodel+ "] metamodel\n\t\tand ["+ configFile +"] config file...");
 			System.out.println("");

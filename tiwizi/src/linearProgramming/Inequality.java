@@ -1,5 +1,7 @@
 package linearProgramming;
 
+import org.eclipse.emf.ecore.EReference;
+
 /**
  *
  * @author Adel ferdjoukh
@@ -19,6 +21,7 @@ public class Inequality {
 	
 	private int MAX=10;
 	
+	private EReference reference;
 	private String [] unknowns;
 	private double [] coefficients;
 	private String operand;
@@ -36,6 +39,14 @@ public class Inequality {
 		position=0;
 	}
 	
+	public Inequality(EReference reference, String operand){
+		this.reference=reference;
+		this.operand=operand;
+		unknowns= new String[MAX];
+		coefficients = new double[MAX];
+		position=0;
+	}
+	
 	/**
 	 * 
 	 * It adds a new variable to the inequality
@@ -47,6 +58,10 @@ public class Inequality {
 		unknowns[position]=unknown;
 		coefficients[position]=coeff1;
 		position++;
+	}
+	
+	public EReference getReference() {
+		return this.reference;
 	}
 
 	public String[] getUnknowns() {
@@ -87,5 +102,4 @@ public class Inequality {
 		
 		return result;
 	}
-
 }

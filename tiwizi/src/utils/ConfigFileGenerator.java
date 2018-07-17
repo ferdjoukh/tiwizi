@@ -39,15 +39,12 @@ public class ConfigFileGenerator {
 		new File(rootClass).mkdir();
 		PrintWriter ecrivain =  new PrintWriter(new BufferedWriter(new FileWriter(this.configFile)));
 		
-		ecrivain.write("%This is a configuration file for Grimm and TIWIZI Tool \n");
+		ecrivain.write("%This is a configuration file for TIWIZI Tool \n");
 		ecrivain.write("%Please do not change the ordering or the name of any element !\n");
 		ecrivain.write("%Replace all 0 by positive integer values\n");
-		
-		ecrivain.write("% \n");
-		ecrivain.write("% \n");
+		ecrivain.write("%-------------------------------------------------------------\n");
 		ecrivain.write("%-------------------------------------------------------------\n");
 		ecrivain.write("%Number of instances for Classes \n");
-		ecrivain.write("%-------------------------------------------------------------\n");
 		ecrivain.write("%-------------------------------------------------------------\n");
 				
 		ArrayList<EClass> cls= new ArrayList<EClass>();
@@ -58,34 +55,13 @@ public class ConfigFileGenerator {
 			if (name.compareTo(rootClass)!=0)
 			ecrivain.write(name+"=0\n");
 		}
-		ecrivain.write("%-------------------------------------------------------------\n");
-		ecrivain.write("%-------------------------------------------------------------\n");
-		ecrivain.write("%Domains of the features \n");
-		ecrivain.write("%-------------------------------------------------------------\n");
-		ecrivain.write("%-------------------------------------------------------------\n");
-		ArrayList<EAttribute> attributes= new ArrayList<EAttribute>();
-		for(EClass c: cls)
-		{
-			attributes= (ArrayList<EAttribute>) modelReader.getAllAttributesFromClass(c);
-			for (EAttribute a: attributes)
-			{
-				String name= a.getName();
-				ecrivain.write(c.getName()+"/"+name+"=lower..upper or a b c ... z\n");
-			}
-					
-		}
-		ecrivain.write("%-------------------------------------------------------------\n");
-		ecrivain.write("%-------------------------------------------------------------\n");
-		ecrivain.write("%Some others \n");
-		ecrivain.write("%-------------------------------------------------------------\n");
-		ecrivain.write("%-------------------------------------------------------------\n");
 		
+		ecrivain.write("%-------------------------------------------------------------\n");
+		ecrivain.write("%-------------------------------------------------------------\n");
+		ecrivain.write("%Unbounded References\n");
+		ecrivain.write("%-------------------------------------------------------------\n");
 		ecrivain.write("RefsBound=0\n");
-		ecrivain.write("FeaturesBound=0\n");
 				
-		ecrivain.write("%-------------------------------------------------------------\n");
-		
-		
 		ecrivain.close();
 		
 	}
