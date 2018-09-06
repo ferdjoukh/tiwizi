@@ -1,8 +1,15 @@
 # TIWIZI
 
-is a tool whose the goal is to help meta-model designers, during their work.
+TIWIZI is a fault localizer for debugging meta-models. The main purpose of the tool is to help users during the task of meta-model design.
 
-TIWIZI is paired with a model generator, named GRIMM.
+The input of the tool are:
+
+- Meta-model: (.ecore file)
+- Candidates values: they consists of bounds for unbounded references for the meta-model and a fixed number of instances for each class of the meta-model.
+
+The role of TIWIZI is to checks that the meta-model and its candidate values are consistant, i.e., it is possible to generate at least one instance of the meta-model using these candidate values.
+
+The tool answers **yes** or give a list of fixing suggestions to correct the meta-model or to modify the candidate values.
 
 # Download it
 
